@@ -1,9 +1,8 @@
 package lt.vu.mif.eventsystem.bl.event.repository;
 
-import lt.vu.mif.eventsystem.model.event.entity.Event;
-import org.springframework.data.repository.CrudRepository;
+import lt.vu.mif.eventsystem.bl.event.repository.interfaces.IEventRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EventRepository extends CrudRepository<Event, Long> {
+public interface EventRepository extends IEventRepository {
 }

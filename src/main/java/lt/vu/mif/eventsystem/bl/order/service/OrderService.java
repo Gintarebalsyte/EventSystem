@@ -1,10 +1,10 @@
 package lt.vu.mif.eventsystem.bl.order.service;
 
 import lombok.RequiredArgsConstructor;
-import lt.vu.mif.eventsystem.bl.event.service.EventOccurenceService;
-import lt.vu.mif.eventsystem.bl.event.service.EventService;
+import lt.vu.mif.eventsystem.bl.event.service.interfaces.IEventOccurrenceService;
+import lt.vu.mif.eventsystem.bl.event.service.interfaces.IEventService;
 import lt.vu.mif.eventsystem.bl.order.dto.OrderRequest;
-import lt.vu.mif.eventsystem.bl.order.repository.OrderRepository;
+import lt.vu.mif.eventsystem.bl.order.repository.interfaces.IOrderRepository;
 import lt.vu.mif.eventsystem.model.event.entity.Event;
 import lt.vu.mif.eventsystem.model.event.entity.EventOccurrence;
 import lt.vu.mif.eventsystem.model.order.entity.Order;
@@ -15,13 +15,13 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-    private final EventService eventService;
-    private final EventOccurenceService eventOccurenceService;
-    private final OrderRepository orderRepository;
+    private final IEventService eventService;
+    private final IEventOccurrenceService eventOccurrenceService;
+    private final IOrderRepository orderRepository;
 
     public void create(OrderRequest orderRequest, UserData recipient) {
         Event event = eventService.retrieveEventForOrder(orderRequest.getEventId());
-        EventOccurrence eventOccurrence = eventOccurenceService.retrieveEventOccurrenceForOrder(orderRequest.getEventOccurrenceId(), orderRequest.getCreateDate(), orderRequest.getNumberOfParticipants());
+        EventOccurrence eventOccurrence = eventOccurrenceService.retrieveEventOccurrenceForOrder(orderRequest.getEventOccurrenceId(), orderRequest.getCreateDate(), orderRequest.getNumberOfParticipants());
 
         Order order = Order.builder()
                 .status(OrderStatus.SUBMITTED)
@@ -33,6 +33,6 @@ public class OrderService {
 
         orderRepository.save(order);
 
-        eventOccurenceService.updateAvailableSeatsCount(eventOccurrence.getId(), -(orderRequest.getNumberOfParticipants()));
+        eventOccurrenceService.updateAvailableSeatsCount(eventOccurrence.getId(), -(orderRequest.getNumberOfParticipants()));
     }
 }

@@ -1,10 +1,9 @@
 package lt.vu.mif.eventsystem.bl.user.repository;
 
-import lt.vu.mif.eventsystem.model.user.UserData;
-import org.springframework.data.repository.CrudRepository;
+import lt.vu.mif.eventsystem.bl.user.repository.interfaces.IUserDataRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserDataRepository extends CrudRepository<UserData, Long> {
+public interface UserDataRepository extends IUserDataRepository {
 
 }
