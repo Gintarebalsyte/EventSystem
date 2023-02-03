@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 public class EventOccurenceService {
     private final EventOccurrenceRepository eventOccurrenceRepository;
 
-    public EventOccurrence retrieveEventOccurrenceForOrder(Long id, int numberOfParticipants) {
+    public EventOccurrence retrieveEventOccurrenceForOrder(Long id, LocalDateTime deadline, int numberOfParticipants) {
         EventOccurrence eventOccurrence = eventOccurrenceRepository.findById(id).orElseThrow();
-        ValidationUtils.validate(eventOccurrence.getEventDate().isAfter(LocalDateTime.now()), "Can't place orders for events that have already started or ended");
+        ValidationUtils.validate(eventOccurrence.getEventDate().isAfter(deadline), "Can't place orders for events that have already started or ended");
         ValidationUtils.validate(numberOfParticipants <= eventOccurrence.getAvailableSeatsCount(), "Not enough available seats");
         return eventOccurrence;
     }

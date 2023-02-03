@@ -21,7 +21,7 @@ public class OrderService {
 
     public void create(OrderRequest orderRequest, UserData recipient) {
         Event event = eventService.retrieveEventForOrder(orderRequest.getEventId());
-        EventOccurrence eventOccurrence = eventOccurenceService.retrieveEventOccurrenceForOrder(orderRequest.getEventOccurrenceId(), orderRequest.getNumberOfParticipants());
+        EventOccurrence eventOccurrence = eventOccurenceService.retrieveEventOccurrenceForOrder(orderRequest.getEventOccurrenceId(), orderRequest.getCreateDate(), orderRequest.getNumberOfParticipants());
 
         Order order = Order.builder()
                 .status(OrderStatus.SUBMITTED)
