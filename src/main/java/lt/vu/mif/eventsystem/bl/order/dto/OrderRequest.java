@@ -1,7 +1,6 @@
 package lt.vu.mif.eventsystem.bl.order.dto;
 
 import lombok.*;
-import lt.vu.mif.eventsystem.bl.event.dto.EventView;
 
 @Getter
 @Setter
@@ -9,7 +8,8 @@ import lt.vu.mif.eventsystem.bl.event.dto.EventView;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 public class OrderRequest {
-    private EventView eventView;
+    private Long eventId;
+    private Long eventOccurrenceId;
     private String additionalInformation;
     private int numberOfParticipants;
 }

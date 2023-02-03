@@ -20,9 +20,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public void create(OrderRequest orderRequest, UserData recipient) {
-        Event event = eventService.retrieveEventForOrder(orderRequest.getEventView().getId());
-
-        EventOccurrence eventOccurrence = eventOccurenceService.retrieveEventOccurrenceForOrder(orderRequest.getEventView().getOccurrenceId(), orderRequest.getNumberOfParticipants());
+        Event event = eventService.retrieveEventForOrder(orderRequest.getEventId());
+        EventOccurrence eventOccurrence = eventOccurenceService.retrieveEventOccurrenceForOrder(orderRequest.getEventOccurrenceId(), orderRequest.getNumberOfParticipants());
 
         Order order = Order.builder()
                 .status(OrderStatus.SUBMITTED)
