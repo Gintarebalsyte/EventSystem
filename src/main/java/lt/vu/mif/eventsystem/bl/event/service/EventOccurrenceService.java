@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class EventOccurenceService implements IEventOccurrenceService {
+public class EventOccurrenceService implements IEventOccurrenceService {
     private final IEventOccurrenceRepository eventOccurrenceRepository;
 
     @Override
